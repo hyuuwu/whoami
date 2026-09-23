@@ -26,13 +26,13 @@ app.command("/kittyfact", async ({ ack, respond }) => {
     await respond({ text: "Failed to fetch a cat fact." });
   }
 });
-app.command("/phrases", async ({ ack, respond }) => {
+app.command("/phrases", async ({ ack, say }) => {
     await ack();
     try {
         const response = await axios.get("https://api.kanye.rest");
-        await respond({ text: `Once a philosopher said this:\n${response.data.quote}` });
+        await say({ text: `Once a philosopher said this:\n${response.data.quote}` });
     } catch (err) {
-        await respond({ text: "you tell the phrases" });
+        await say({ text: "you tell the phrases" });
     }
 });
 
