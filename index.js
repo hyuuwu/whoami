@@ -35,7 +35,20 @@ app.command("/phrases", async ({ ack, say }) => {
         await say({ text: "you tell the phrases" });
     }
 });
-
+//app command
+app.command("/whysoserious", async ({ ack, say }) => {
+    await ack();
+    try {
+        const response = await axios.get("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit");
+        if (response.data.type === "single") {
+            await say({ text: `Here's a joke for you:\n${response.data.joke}` });
+        } else {
+            await say({ text: `Here's a joke for you:\n${response.data.setup}\n${response.data.delivery}` });
+        }
+    } catch (err) {
+        await say({ text: "shi aint funny nomo" });
+    }
+});
 
 (async () => {
   await app.start();
