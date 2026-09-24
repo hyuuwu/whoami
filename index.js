@@ -36,11 +36,11 @@ app.command("/kittyfact", async ({ ack, say }) => {
     await say({ text: "Failed to fetch a cat fact." });
   }
 });
-app.command("/phrases", async ({ ack, say }) => {
+app.command("/phrases", async ({ command,ack, say }) => {
     await ack();
     try {
         const response = await axios.get("https://api.kanye.rest");
-    await say({ text: `Once a philosopher said this:\n${response.data.quote}` });
+    await say({ text: `Once ${command.user_name} said this:\n${response.data.quote}` });
     } catch (err) {
     await say({ text: "you tell the phrases" });
     }
@@ -59,7 +59,57 @@ app.command("/whysoserious", async ({ ack, say }) => {
     await say({ text: "shi aint funny nomo" });
     }
 });
+app.message(/laufey/i, async function ({ message, say }) {
+  try {  
+    await say({
+      blocks: [
+        {
+          type: "image",
+          image_url: "https://cdn.hackclub.com/01a0d520-abc1-7820-a1d7-552f6b553a47/laufey-cube.gif",
+          alt_text: "A funny gif"
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: `wow. all cuz of <@${message.user}>.`
+          }
+        }
+      ]
+    });
+  } catch (error) {
+    console.error("Error sending message:", error);
+  }
+});
+let i = 0;
+app.message('test123', async function ({ message, say }) {
+    await say(`test` + i);
+    i++;
+  });
 
+
+app.message(/clairo/i, async function ({ message, say }) {
+    try {
+      await say({
+    blocks: [
+      {
+        type: "image",
+        image_url: "https://cdn.hackclub.com/01a0d538-7815-7d72-8a91-18978bc62cc0/clairo-phone-call.gif",
+        alt_text: "A funny gif"
+      },
+      {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `wow. all cuz of <@${message.user}>.`
+        }
+      }
+    ]
+  });
+} catch (error) {
+  console.error("Error sending message:", error);
+}
+});
 (async () => {
   await app.start();
   console.log("bot is running!");
