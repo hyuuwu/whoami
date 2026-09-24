@@ -46,7 +46,7 @@ app.command("/phrases", async ({ ack, say }) => {
     }
 });
 //app command
-app.command("/whysoserious", async ({ ack, respond }) => {
+app.command("/whysoserious", async ({ ack, say }) => {
     await ack();
     try {
         const response = await axios.get("https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit");
