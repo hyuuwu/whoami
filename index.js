@@ -246,6 +246,16 @@ app.command("/gib-ai", async ({ command, ack, respond }) => {
     });
   }
 });
+const answers = ["yes", "no", "maybe", "definitely", "absolutely not", "ask again later"];
+app.command("/8ball", async ({ command, ack, respond }) => {
+  await ack();
+  const randomAnswer = answers[Math.floor(Math.random() * answers.length)];
+  await respond({
+    response_type: "in_channel",
+    text: `🎱 ${randomAnswer}`
+  });
+});
+
 (async () => {
   await app.start();
   console.log("⚡️ Bot is running!");
