@@ -58,6 +58,8 @@ app.command("/phrases", async ({ command, ack, say }) => {
   }
 });
 
+
+
 app.command("/whysoserious", async ({ ack, say }) => {
   await ack();
   try {
@@ -246,6 +248,45 @@ app.command("/gib-ai", async ({ command, ack, respond }) => {
     });
   }
 });
+
+app.command("/capitalof", async ({ command, ack, respond }) => {
+  await ack();
+
+  try {
+    const country = command.text?.trim();
+
+    if (!country) {
+      await respond("Please enter a country. Example: `/capitalof Brazil`");
+      return;
+    }
+
+    const response = await axios.get(
+      `https://api.restcountries.com/countries/v5/names.common/${encodeURIComponent(country)}?pretty=1`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.RESTCOUNTRIES_API_KEY}`
+        }
+      }
+    );
+
+    console.log(response.data);
+
+    const result = response.data.data.objects[0];
+    const capital = result.capitals?.[0]?.name;
+
+    await respond(
+      capital
+        ? `The capital of ${country} is *${capital}*.`
+        : `I couldn't find the capital of ${country}.`
+    );
+
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+
+    await respond("I couldn't find that country.");
+  }
+});
+
 const answers = ["yes", "no", "maybe", "definitely", "absolutely not", "ask again later"];
 app.command("/8ball", async ({ command, ack, respond }) => {
   await ack();
@@ -277,6 +318,7 @@ app.message(/misinput/i, async ({ message, say }) => {
     console.error("Error sending message:", error);
   }
 });
+
 (async () => {
   await app.start();
   console.log("⚡️ Bot is running!");
