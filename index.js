@@ -268,7 +268,7 @@ app.message(/misinput/i, async ({ message, say }) => {
           type: "section",
           text: {
             type: "mrkdwn",
-            text: 'IT WAS AN MISINPUT OK??? <@${message.user}>.'
+            text: `IT WAS AN MISINPUT OK? <@${message.user}>.`
           }
         }
       ]
