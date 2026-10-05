@@ -249,7 +249,7 @@ app.command("/gib-ai", async ({ command, ack, respond }) => {
   }
 });
 
-app.command("/capitalof", async ({ command, ack, respond }) => {
+app.command("/capitalof", async ({ command, ack, say }) => {
   await ack();
 
   try {
@@ -274,7 +274,7 @@ app.command("/capitalof", async ({ command, ack, respond }) => {
     const result = response.data.data.objects[0];
     const capital = result.capitals?.[0]?.name;
 
-    await respond(
+    await say(
       capital
         ? `The capital of ${country} is *${capital}*.`
         : `I couldn't find the capital of ${country}.`
@@ -283,7 +283,7 @@ app.command("/capitalof", async ({ command, ack, respond }) => {
   } catch (error) {
     console.error(error.response?.data || error.message);
 
-    await respond("I couldn't find that country.");
+    await say("I couldn't find that country.");
   }
 });
 
