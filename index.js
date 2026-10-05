@@ -255,8 +255,22 @@ app.command("/8ball", async ({ command, ack, respond }) => {
     text: `🎱 ${randomAnswer}`
   });
 });
-
+app.message(/misinput/i, async ({ message, say }) => {
+  try {
+    await say({
+      blocks: [
+        {
+          type: "image",
+          image_url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.kym-cdn.com%2Fphotos%2Fimages%2Foriginal%2F002%2F354%2F787%2F01b.gif&f=1&nofb=1&ipt=d4edb9d4b99840befc801a2573643d48edd231fe5805c4ea235711a9097cef6c&ipo=images"
+        }
+      ]
+    });
+  } catch (error) {
+    console.error("Error sending message:", error);
+  }
+});
 (async () => {
   await app.start();
   console.log("⚡️ Bot is running!");
+  console.log("whats 9 + 10? 21");
 })();
