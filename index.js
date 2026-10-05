@@ -81,7 +81,7 @@ app.message(/laufey/i, async ({ message, say }) => {
         {
           type: "image",
           image_url: "https://cdn.hackclub.com/01a0d520-abc1-7820-a1d7-552f6b553a47/laufey-cube.gif",
-          alt_text: "A funny gif"
+          alt_text: "A funny gif",
         },
         {
           type: "section",
@@ -261,7 +261,15 @@ app.message(/misinput/i, async ({ message, say }) => {
       blocks: [
         {
           type: "image",
-          image_url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.kym-cdn.com%2Fphotos%2Fimages%2Foriginal%2F002%2F354%2F787%2F01b.gif&f=1&nofb=1&ipt=d4edb9d4b99840befc801a2573643d48edd231fe5805c4ea235711a9097cef6c&ipo=images"
+          image_url: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.kym-cdn.com%2Fphotos%2Fimages%2Foriginal%2F002%2F354%2F787%2F01b.gif&f=1&nofb=1&ipt=d4edb9d4b99840befc801a2573643d48edd231fe5805c4ea235711a9097cef6c&ipo=images",
+          alt_text: "A funny gif"
+        },
+        {
+          type: "section",
+          text: {
+            type: "mrkdwn",
+            text: 'IT WAS AN MISINPUT OK??? <@${message.user}>.'
+          }
         }
       ]
     });
